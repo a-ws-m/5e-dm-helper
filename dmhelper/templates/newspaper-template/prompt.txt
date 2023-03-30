@@ -1,4 +1,4 @@
-Write an article for the fictional tabloid paper, the {{title}}, whose
+Write a very long article for the fictional tabloid paper, the {{title}}, whose
 head offices are in the city of {{city}} in the setting of {{setting}}.
 The article should begin with its title, using the syntax "Title: ...".
 {% if include_picture %}
