@@ -1,0 +1,22 @@
+\usepackage{newtxtext,newtxmath}
+\usepackage{etoolbox}
+\usepackage{fontspec}
+\newfontfmaily{\bigheadlinefont}{QTDeuce}
+\newcommand{\headlinestyle}{\itshape\huge}
+\newcommand{\bylinestyle}{\scshape\Large}
+\patchcmd{\headline}{#1}{\headlinestyle #1}{}{}
+\patchcmd{\byline}{#1}{\bylinestyle #1}{}{}
+
+\renewcommand{\maketitle}{\thispagestyle{empty}
+\vspace*{-40pt}
+\begin{center}
+{\setlength\fboxsep{3mm}\raisebox{12pt}}\hfill%
+{\textgoth{\huge\usefont{LYG}{bigygoth}{m}{n} \@papername}}\hfill%
+\raisebox{12pt}{\textbf{\footnotesize \@paperlocation}}\\
+\vspace*{0.1in}
+\rule[0pt]{\textwidth}{0.5pt}\\
+{\small VOL.\MakeUppercase{\roman{volume}}\ldots No.\arabic{issue}} \hfill \MakeUppercase{\small\it\@date} \hfill {\small\MakeUppercase{\@paperprice}}\\
+\rule[6pt]{\textwidth}{1.2pt}
+\end{center}
+\pagestyle{plain}
+} 

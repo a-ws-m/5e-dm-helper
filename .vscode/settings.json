@@ -1,0 +1,4 @@
+{
+    "python.formatting.provider": "black",
+    "latex-workshop.latex.recipe.default": "latexmk (xelatex)"
+}

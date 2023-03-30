@@ -1,0 +1,9 @@
+Write an article for the fictional tabloid paper, the {{title}}, whose
+head offices are in the city of {{city}} in the setting of {{setting}}.
+The article should begin with its title, using the syntax "Title: ...".
+{% if include_picture %}
+Include a placeholder in the article indicating where a picture should be
+included, alongside a description of the picture, using the syntax "Picture:
+description".
+{% endif %}
+The article is about {{subject[0].lower() + subject[1:]}}

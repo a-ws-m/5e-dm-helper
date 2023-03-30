@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+\usepackage{newspaper}
+
+\date{{{date}}}
+\currentvolume{{{volume}}}
+\currentissue{{{issue}}}
+
+%% [LianTze] The newspaper package also provides 
+%% these commands to set various metadata:
+
+%% The banner headline on the first page
+%%   (The colon after s: is to get a more
+%%   modern majuscule s in this font instead of 
+%%   the medieval tall s. For anyone interested 
+%%   in the history: 
+%%  http://medievalwriting.50megs.com/scripts/letters/historys.htm)
+\SetPaperName{{{title.replace("s", "s:")}}}
+
+%% The name used in the running header after
+%% the first page
+\SetHeaderName{{{title}}}
+
+%% and also...
+\SetPaperPrice{{{price}}}
+\SetPaperLocation{{{location}}}
+
+
+% [LianTze] times (the package not the font) is rather outdated now; use newtx (see later)
+% \usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\usepackage{picinpar}
+%uasage of picinpar:
+%\begin{window}[1,l,\includegraphics{},caption]xxxxx\end{window}
+
+
+%% [LianTze] Contains some modifications
+{% raw %}
+\usepackage{newtxtext,newtxmath}
+\usepackage{etoolbox}
+\usepackage{fontspec}
+\newfontfamily{\bigheadlinefont}{QTDeuce}
+\newcommand{\headlinestyle}{\itshape\huge}
+\newcommand{\bylinestyle}{\scshape\Large}
+\patchcmd{\headline}{#1}{\headlinestyle #1}{}{}
+\patchcmd{\byline}{#1}{\bylinestyle #1}{}{}
+{% endraw %}
+
+\renewcommand{\maketitle}{\thispagestyle{empty}
+\vspace*{-40pt}
+\begin{center}
+{\setlength\fboxsep{3mm}\raisebox{12pt}{}}\hfill%
+{\textgoth{\huge\usefont{LYG}{bigygoth}{m}{n} {{title.replace("s", "s:")}}}}\hfill%
+\raisebox{12pt}{\textbf{\footnotesize {{location}}}}\\
+\vspace*{0.1in}
+\rule[0pt]{\textwidth}{0.5pt}\\
+\makebox[0pt][l]{\small VOL.\MakeUppercase{\roman{volume}}\ldots No.\arabic{issue}} \hfill \MakeUppercase{\small\it {{date}}} \hfill {\small\MakeUppercase {{{price}}}}\\
+\rule[6pt]{\textwidth}{1.2pt}
+\end{center}
+\pagestyle{plain}
+} 
+
+%%... so now you can redefine the headline and byline style if you want to.
+%% These can be issued just before any
+%% byline or headline in the paper, to
+%% individually style each article
+%%
+% \renewcommand{\headlinestyle}{\itshape\Large\lsstyle}
+% \renewcommand{\bylinestyle}{\bfseries\Large\raggedright}
+
+
+%%%%%%%%%  Front matter   %%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+{% if full_header %}
+    \headline{\fontsize{{{big_headline_size}}}{20}\selectfont\bigheadlinefont {{articles[0].title}} }
+{% endif %}
+
+\begin{multicols}{{{num_cols}}}
+
+{% for article in articles %}
+    {% if not article.full_header %}
+        {% if article.author %}
+            \byline{{{article.title}}}{{{article.author}}}
+        {% else %}
+            \headline{{{article.title}}}
+        {% endif %}
+    {% endif %}
+
+    {% for article_block in article.content %}
+        {% if article_block.picture %}
+            \begin{window}[1,c,\includegraphics[width=\linewidth]{{{article_block.picture}}},\centering{{{article_block.caption}}}]\end{window}
+        {% else %}
+            {{article_block.text}}
+        {% endif %}
+    {% endfor %}
+
+    \closearticle
+{% endfor %}
+
+\end{multicols}
+
+\end{document}
