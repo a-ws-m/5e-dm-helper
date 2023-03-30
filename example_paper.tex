@@ -1,0 +1,138 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+\usepackage{newspaper}
+
+\date{2 Olarune 998 YK}
+\currentvolume{4}
+\currentissue{6}
+
+%% [LianTze] The newspaper package also provides 
+%% these commands to set various metadata:
+
+%% The banner headline on the first page
+%%   (The colon after s: is to get a more
+%%   modern majuscule s in this font instead of 
+%%   the medieval tall s. For anyone interested 
+%%   in the history: 
+%%  http://medievalwriting.50megs.com/scripts/letters/historys.htm)
+\SetPaperName{The Sharn Inquis:itive}
+
+%% The name used in the running header after
+%% the first page
+\SetHeaderName{The Sharn Inquisitive}
+
+%% and also...
+\SetPaperPrice{1 CP}
+\SetPaperLocation{}
+
+
+% [LianTze] times (the package not the font) is rather outdated now; use newtx (see later)
+% \usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\usepackage{picinpar}
+%uasage of picinpar:
+%\begin{window}[1,l,\includegraphics{},caption]xxxxx\end{window}
+
+
+%% [LianTze] Contains some modifications
+
+\usepackage{newtxtext,newtxmath}
+\usepackage{etoolbox}
+\usepackage{fontspec}
+\newfontfamily{\bigheadlinefont}{QTDeuce}
+\newcommand{\headlinestyle}{\itshape\huge}
+\newcommand{\bylinestyle}{\scshape\Large}
+\patchcmd{\headline}{#1}{\headlinestyle #1}{}{}
+\patchcmd{\byline}{#1}{\bylinestyle #1}{}{}
+
+\renewcommand{\maketitle}{\thispagestyle{empty}
+\vspace*{-40pt}
+\begin{center}
+{\setlength\fboxsep{3mm}\raisebox{12pt}{}}\hfill%
+{\textgoth{\huge\usefont{LYG}{bigygoth}{m}{n} The Sharn Inquis:itive}}\hfill%
+\raisebox{12pt}{\textbf{\footnotesize }}\\
+\vspace*{0.1in}
+\rule[0pt]{\textwidth}{0.5pt}\\
+\makebox[0pt][l]{\small VOL.\MakeUppercase{\roman{volume}}\ldots No.\arabic{issue}} \hfill \MakeUppercase{\small\it 2 Olarune 998 YK} \hfill {\small\MakeUppercase {1 CP}}\\
+\rule[6pt]{\textwidth}{1.2pt}
+\end{center}
+\pagestyle{plain}
+} 
+
+%%... so now you can redefine the headline and byline style if you want to.
+%% These can be issued just before any
+%% byline or headline in the paper, to
+%% individually style each article
+%%
+% \renewcommand{\headlinestyle}{\itshape\Large\lsstyle}
+% \renewcommand{\bylinestyle}{\bfseries\Large\raggedright}
+
+
+%%%%%%%%%  Front matter   %%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+
+\begin{multicols}{3}
+
+            \headline{The Mysterious Disappearance of Brother Oren: A Daughter's Plea }
+
+            
+
+
+
+The city of Sharn is in shock after the recent terror attack that occurred during a protest against the Red Sun Vassals' inquisition. Now, the city is reeling from the disappearance of Brother Oren, a member of the Red Sun Vassals. 
+
+Brother Oren was last seen around the scene of the protest, where he had gone to ensure the safety of those in attendance. He was not there to support the protestors, of course, but his order believes that everyone has a right to freedom of speech and he wanted to make sure everyone was safe. 
+
+The Red Sun Vassals have been searching for Brother Oren for weeks, but have yet to find any clues as to his whereabouts. His ten-year-old daughter, Mina, has been pleading for information leading to her father's safe return. 
+
+``My dad is a good man,'' Mina said in an interview with The Sharn Inquisitive. ``He's always been there for me and I just want him to come home. I miss him so much and I just want him to be safe. Please, if anyone knows anything about my dad, please let us know.'' 
+
+The Red Sun Vassals have offered a reward for any information leading to Brother Oren's safe return. In the meantime, they are continuing their search, hoping to find him soon. If you have any information, please contact the Red Sun Vassals or the Sharn Inquisitive.
+
+    \closearticle
+            \headline{Another Wave of Cyran Refugees Arrive, Bringing Fear of the `Curse of Cyre'}
+
+            
+
+
+
+The city of Sharn is once again facing an influx of Cyran refugees, this time fleeing the recent outbreak of the `Curse of Cyre' epidemic in New Cyre. The City Watch have been instructed to strictly control entry to the city to avoid any potential spread of the disease, and many people are concerned that the mass migration could be used as a cover by Dark Six worshippers to enter the city unnoticed.
+
+The refugees tell stories of a mysterious illness that has been sweeping through New Cyre, leaving many of its citizens dead in its wake. Symptoms of the `Curse of Cyre' include fever, chills, and a strange rash that spreads across the body. It is believed that the disease is being spread by contact with infected individuals, and so far no cure has been found.
+
+House Jorasco, the healers of Eberron, have been working on a cure for the `Curse of Cyre' and have reassured citizens that the cost of treatment will be covered by their latest insurance package. However, many people are still wary of the new arrivals, believing that they may bring the disease with them into the city.
+
+The City Watch is doing its best to keep the peace, but tensions are high. Some citizens have taken to the streets to protest the influx of refugees, while others are doing their best to help those in need. The situation is far from ideal, and it remains to be seen how the city will respond to this latest crisis.
+
+    \closearticle
+            \byline{The Moral Crisis of Sharn: A City in Decline}{Mabel Sneaker}
+
+            
+
+
+
+
+It's no secret that Sharn is in the midst of a moral crisis. The City Watch has been seizing more and more shipments of dragonsblood, a powerful and illegal drug, and it's becoming increasingly clear that most of this substance is being smuggled in by goblins affiliated with the criminal organization Daask.
+
+The fact that these criminals are receiving government benefits while they wreak havoc on our city is simply outrageous. It's a slap in the face to all of the honest, hardworking citizens of Sharn who are trying to do the right thing. It's also a sign of how far our city has fallen.
+
+The situation is so dire that even the most basic of activities, such as travelling through the city, has become a dangerous task. The area of Khyber's Gate, in particular, is a no-go zone for most citizens due to the presence of Daask criminals. It's a sad state of affairs that a whole sector of our bustling city is unsafe to travel.
+
+It's time for the citizens of Sharn to take a stand and demand that the government take action to address this moral crisis. We must make sure that criminals are held accountable for their actions and that our city is a safe place for everyone. We must also demand that our government provide adequate resources to help those who are struggling with addiction to dragonsblood and other substances.
+
+It's time to take back our city and make it a place that we can all be proud of. We must not allow our moral crisis to continue.
+
+    \closearticle
+
+\end{multicols}
+
+\end{document}
