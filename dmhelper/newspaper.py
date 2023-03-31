@@ -114,9 +114,10 @@ class PaperAI:
 
     def __init__(self, api_key: str) -> None:
         openai.api_key = api_key
-        # Load the Jinja template
-        self.template = JINJA_ENV.get_template("prompt.txt")
-        # Format the template with the data
+        # Load the Jinja templates
+
+        self.system_template = JINJA_ENV.get_template("system-template.txt")
+        self.message_template = JINJA_ENV.get_template("message-template.txt")
 
     def query(
         self,
@@ -127,53 +128,58 @@ class PaperAI:
         author: Optional[str] = None,
         include_picture: bool = False,
     ) -> Article:
-        data = {
+        template_data = {
             "subject": article_subject,
             "title": paper_title,
             "city": paper_city,
             "setting": paper_setting,
             "include_picture": include_picture,
         }
-        prompt = self.template.render(data)
+
+        system_txt = self.system_template.render(template_data)
+        message_txt = self.message_template.render(template_data)
 
         # Define the parameters for the GPT-3 request
         params = {
-            "model": "text-davinci-003",
-            "prompt": prompt,
-            "temperature": 0.4,
-            "max_tokens": 3000,
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                {"role": "system", "content": system_txt},
+                {"role": "user", "content": message_txt},
+            ],
+            # "max_tokens": 1200,
         }
 
         # Send the request to GPT-3 and print the response
-        response = openai.Completion.create(**params)
+        response = openai.ChatCompletion.create(**params)
         print(response)
-        return self.parse_response(response.choices[0].text, author)
+        response_content = response.choices[0].message.content
+        return self.parse_response(response_content, author)
 
     @staticmethod
-    def parse_response(response: str, author: Optional[str] = None) -> Article:
+    def parse_response(response_content: str, author: Optional[str] = None) -> Article:
         """Format an OpenAI response."""
         title_patt = r"Title: (?P<title>.+)"
         picture_patt = r"Picture: (?P<picture_description>.+)"
         quotes_patt = r"\"([^\"]+)\""
 
-        print(response)
+        print(response_content)
 
         # Replace quotes with the proper format
-        response = re.sub(quotes_patt, r"``\g<1>''", response)
+        response_content = re.sub(quotes_patt, r"``\g<1>''", response_content)
 
-        title_match = re.search(title_patt, response)
+        title_match = re.search(title_patt, response_content)
         if not title_match:
             raise ValueError("Could not find title!")
         else:
             title = title_match.group("title")
 
-        response = re.sub(title_patt, "", response)
+        response_content = re.sub(title_patt, "", response_content)
 
-        picture_match = re.search(picture_patt, response)
+        picture_match = re.search(picture_patt, response_content)
         if picture_match:
             picture_description = picture_match.group("picture_description")
 
-            article_texts = re.split(picture_patt, response)
+            article_texts = re.split(picture_patt, response_content)
             # The second element contains the picture description, which we overwrite
             del article_texts[1]
 
@@ -186,7 +192,7 @@ class PaperAI:
             ]
 
         else:
-            article_blocks = [ArticleBlock(response)]
+            article_blocks = [ArticleBlock(response_content)]
 
         return Article(title, article_blocks, author)
 
@@ -223,7 +229,11 @@ class PaperAI:
 
 
 if __name__ == "__main__":
-    inputs = [Path("example_prompt_1.txt"), Path("example_prompt_2.txt"), Path("example_prompt_3.txt")]
+    inputs = [
+        Path("example_prompt_1.txt"),
+        Path("example_prompt_2.txt"),
+        Path("example_prompt_3.txt"),
+    ]
     config = PaperConfig(
         inputs,
         "The Sharn Inquisitive",
@@ -231,7 +241,7 @@ if __name__ == "__main__":
         4,
         6,
         "1 CP",
-        [None, None, "Mabel Sneaker"]
+        [None, None, "Mabel Sneaker"],
     )
     paper_ai = PaperAI(Path("OPENAI-API.txt").read_text())
     paper = paper_ai.get_paper(config)

@@ -1,0 +1,132 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+\usepackage{newspaper}
+
+\date{2 Olarune 998 YK}
+\currentvolume{4}
+\currentissue{6}
+
+%% [LianTze] The newspaper package also provides 
+%% these commands to set various metadata:
+
+%% The banner headline on the first page
+%%   (The colon after s: is to get a more
+%%   modern majuscule s in this font instead of 
+%%   the medieval tall s. For anyone interested 
+%%   in the history: 
+%%  http://medievalwriting.50megs.com/scripts/letters/historys.htm)
+\SetPaperName{The Sharn Inquis:itive}
+
+%% The name used in the running header after
+%% the first page
+\SetHeaderName{The Sharn Inquisitive}
+
+%% and also...
+\SetPaperPrice{1 CP}
+\SetPaperLocation{}
+
+
+% [LianTze] times (the package not the font) is rather outdated now; use newtx (see later)
+% \usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\usepackage{picinpar}
+%uasage of picinpar:
+%\begin{window}[1,l,\includegraphics{},caption]xxxxx\end{window}
+
+
+%% [LianTze] Contains some modifications
+
+\usepackage{newtxtext,newtxmath}
+\usepackage{etoolbox}
+\usepackage{fontspec}
+\newfontfamily{\bigheadlinefont}{QTDeuce}
+\newcommand{\headlinestyle}{\itshape\huge}
+\newcommand{\bylinestyle}{\scshape\Large}
+\patchcmd{\headline}{#1}{\headlinestyle #1}{}{}
+\patchcmd{\byline}{#1}{\bylinestyle #1}{}{}
+
+\renewcommand{\maketitle}{\thispagestyle{empty}
+\vspace*{-40pt}
+\begin{center}
+{\setlength\fboxsep{3mm}\raisebox{12pt}{}}\hfill%
+{\textgoth{\huge\usefont{LYG}{bigygoth}{m}{n} The Sharn Inquis:itive}}\hfill%
+\raisebox{12pt}{\textbf{\footnotesize }}\\
+\vspace*{0.1in}
+\rule[0pt]{\textwidth}{0.5pt}\\
+\makebox[0pt][l]{\small VOL.\MakeUppercase{\roman{volume}}\ldots No.\arabic{issue}} \hfill \MakeUppercase{\small\it 2 Olarune 998 YK} \hfill {\small\MakeUppercase {1 CP}}\\
+\rule[6pt]{\textwidth}{1.2pt}
+\end{center}
+\pagestyle{plain}
+} 
+
+%%... so now you can redefine the headline and byline style if you want to.
+%% These can be issued just before any
+%% byline or headline in the paper, to
+%% individually style each article
+%%
+% \renewcommand{\headlinestyle}{\itshape\Large\lsstyle}
+% \renewcommand{\bylinestyle}{\bfseries\Large\raggedright}
+
+
+%%%%%%%%%  Front matter   %%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+
+\begin{multicols}{3}
+
+            \headline{Brother of the Red Sun Vassals Disappears without a Trace after Terror Attack}
+
+            
+
+The city of Sharn is still reeling from the vicious terrorist attack that took place during a recent protest against the inquisition of the Red Sun Vassals. While many were injured and some lives were tragically lost, one man has vanished without a trace in the chaos that ensued.
+
+Brother Jareth, a member of the Red Sun Vassals, was last seen at the site of the attack. According to his peers, he was not there to join in the protest but to ensure the safety of everyone in attendance. However, since the attack, there has been no sign of Jareth, leaving his friends and family worried sick.
+
+The Sharn Inquisitive spoke to Jareth's ten-year-old daughter, who is pleading with the public for any information that may lead to her father's safe return. Tears streaming down her face, she said, ``My daddy is the bravest man in the world. He wouldn't leave us like this unless something really bad happened. Please, if you know something, anything, please come forward.''
+
+The Red Sun Vassals have been known to have many enemies due to their controversial beliefs and practices. Could someone have taken advantage of the chaos and harmed Brother Jareth in the process? The Sharn Inquisitive urges anyone with information, no matter how small or seemingly insignificant, to contact the authorities immediately.
+
+The disappearance of Brother Jareth is a tragic reminder of the dangers that we face in a divided city. It is up to all of us to work together to ensure that this kind of violence and injustice never happens again.
+
+    \closearticle
+            \headline{Cyran Refugees Camped Outside Sharn Gates Amid Fears of Epidemic}
+
+            
+Sharn City Watch has put up strict measures to control the entry of Cyran refugees who are camped outside the city gates. These refugees have recently been affected by a deadly epidemic known as the ``The Great Scourge of New Cyre.'' House Jorasco is working round the clock to come up with a cure for the disease.
+
+Meanwhile, Sharn residents are cautious of the mass migration and fear that some Dark Six worshippers may use it as a cover to enter the city unnoticed. ``We cannot afford to let the Dark Six get a foothold in our city,'' said Captain Kalaes of the Sharn City Watch. ``We have put up extra security measures at the gate, and we will screen everyone who enters the city.''
+
+The refugees have been camping outside of Sharn City gates for the last three days, with little to no assistance from the city. Most of them have lost their homes and loved ones to the epidemic that broke out in New Cyre. The City Watch is worried that allowing them into Sharn could lead to the epidemic spreading to the city's population. However, some concerned citizens have called on the city council to provide relief to these refugees and ensure that they have enough food and shelter until they can be allowed into the city.
+
+Speaking to reporters, a representative from House Jorasco assured the people of Sharn that they were working on a cure for the epidemic. ``Our latest insurance package will cover the costs associated with treating the disease, and once the cure is available, it will be made accessible to everyone.'' House Jorasco has requested all Sharn residents to remain vigilant and report any suspected cases of the disease to the authorities.
+
+In the meantime, the refugees remain camped outside the city gates, hoping for assistance from the city council or some other benevolent organization. The fate of these refugees and potential Dark Six worshippers remains unclear.
+
+    \closearticle
+            \byline{The Moral Crisis of Sharn}{Mabel Sneaker}
+
+            
+
+It is with a heavy heart that I write this piece, dear readers, about the ongoing moral crisis among the citizens of Sharn. The recent surge in the illegal drug trade, specifically the notorious dragonsblood, has brought shame upon our bustling city.
+
+The City Watch is doing all it can to thwart this menace, with more and more shipments of the substance being seized. Alas, it seems that the fight is far from over, as goblins affiliated with Daask, an organization known for their criminal activities, continue to smuggle in this poison.
+
+What is most concerning is the fact that there are rumors that many of these goblins are in receipt of government benefits. It's outrageous that our tax dollars are being used to fund their illegal activities!
+
+And don't even get me started on the state of Khyber's Gate. This whole sector is now unsafe because of the criminal presence by Daask. It's unacceptable that this section of our city is being held hostage by these thugs.
+
+It's time we take a stand and demand action from our leaders. We need to clean up our streets and restore Sharn to its former glory. Let us not turn a blind eye to this moral crisis any longer.
+
+    \closearticle
+
+\end{multicols}
+
+\end{document}
